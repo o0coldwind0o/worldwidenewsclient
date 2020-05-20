@@ -21,11 +21,6 @@ import { MySessionService} from '../session-storage.service';
   `
 })
 
-    
-	
-	
-	
-	
 export class FavoriteComponent implements OnInit {
 newss:Object;
 
@@ -34,53 +29,45 @@ clickMessage = '';
  
    
    ngOnInit() {
-   
-     if(this.session&&this.session.getItem("username")!=undefined)
-     {	
-	  console.log(this.session.getItem("success"))
-	  console.log(this.session.getItem("username"))
-	  console.log(this.session.getItem("password"))
+    if(this.session&&this.session.getItem("username")!=undefined){	
+		console.log(this.session.getItem("success"))
+		console.log(this.session.getItem("username"))
+		console.log(this.session.getItem("password"))
 	  
-	 let a=this.session.getItem("username")
-	 let b=this.session.getItem("password")
+		let a = this.session.getItem("username")
+		let b = this.session.getItem("password")
 	  
-	 
-	  this.data.login_getFav(`${a}`,`${b}`,2).subscribe(data=>{
+		this.data.login_getFav(`${a}`,`${b}`,2).subscribe(data=>{
 	  
-	  this.newss = data;
-	  console.log(this.newss);
-	 })
-     } 
-	 else // endif
-	 {
+		this.newss = data;
+		console.log(this.newss);
+		})
+    } else {
 		this.clickMessage = `Sorry! Need to login first! `;
 		window.alert( this.clickMessage)
 	}
    }
   
-	delFavHandler(i:number,news:Object,choice:number)
-	{if(this.session.getItem("username")!=undefined)
-	{ 
-     let a=this.session.getItem("username")
-	 let b=this.session.getItem("password")
-	 let id =i
-	 let newsfav=news
+	delFavHandler(i:number,news:Object,choice:number){
+		if(this.session.getItem("username")!=undefined){ 
+    		let a = this.session.getItem("username")
+			let b = this.session.getItem("password")
+			let id = i
+			let newsfav = news
 	
-	 this.data.addFav(`${a}`,`${b}`, id, newsfav,3).subscribe(data=>{
-     //this.newss = JSON.stringify(data);	//error mapping as object return not array
-      
-     this.clickMessage =` News with title: ${news[i].title} is deleted!`
-	 window.alert( this.clickMessage)
-	 this.ngOnInit()
-	})}
-    else {
-     this.clickMessage = `Need to login first!  News with title: ${news[i].title} is pressed!`;
-     window.alert( this.clickMessage)
-	 this.ngOnInit()
-	}
-   }
-	editFavHandler(i:number,news:Object)
-	{
+			this.data.addFav(`${a}`,`${b}`, id, newsfav,3).subscribe(data=>{
+        	this.clickMessage =` News with title: ${news[i].title} is deleted!`
+			window.alert( this.clickMessage)
+			this.ngOnInit()
+			})
+		} else {
+    		this.clickMessage = `Please login first!  News with title: ${news[i].title} is pressed!`;
+    		window.alert( this.clickMessage)
+			this.ngOnInit()
+		}
+    }
+
+	editFavHandler(i:number,news:Object){
 		this.clickMessage = `Sorry this function not implemented yet!  News with title: ${news[i].title} will be edited!`;
 		window.alert( this.clickMessage)
 		this.ngOnInit()
