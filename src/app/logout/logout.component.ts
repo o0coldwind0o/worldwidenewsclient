@@ -12,19 +12,16 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit() {
   
-if(this.session&&this.session.getItem("username")!=undefined)
-     {	
-	  console.log(this.session.getItem("success"))
-	  console.log(this.session.getItem("username"))
-	  console.log('logging out')
-	  this.session.clear()
-      
-	  this.router.navigate(['/login'])
-	 }
-else 
-{window.alert('You have not login ! Pls. login to visit us !')
-this.router.navigate(['/login'])
-}
+    if(this.session&&this.session.getItem("username")!=undefined){
+	      console.log(this.session.getItem("success"))
+	      console.log(this.session.getItem("username"))
+	      console.log('logging out')
+	     this.session.clear()  
+	      this.router.navigate(['/login'])
+	  } else {
+      window.alert('You have not login ! Pls. login to visit us !')
+      this.router.navigate(['/login'])
+    }
   }
 }
 

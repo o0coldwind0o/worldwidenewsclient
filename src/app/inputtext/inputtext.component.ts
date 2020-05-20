@@ -33,38 +33,33 @@ clickMessage = '';
 newss:Object;
   constructor(private data: DataService,private session: MySessionService, private router: Router) { }
 
- addSearch(newSearch:string){
-	if(newSearch!=''){
-  this.data.getNewss(`${newSearch}`).subscribe(data=>{
-  
-  this.newss = data;			
-//  console.log(this.books)
-	})
-	}
+  addSearch(newSearch:string){
+    if(newSearch!=''){
+      this.data.getNewss(`${newSearch}`).subscribe(data=>{
+      this.newss = data;			
+	    })
+	  }
   }
  
-addFavHandler(i:number,news:Object,choice:number)
-{if(this.session&&this.session.getItem("username")!=null)
-	{ 
-     let a=this.session.getItem("username")
-	 let b=this.session.getItem("password")
-	 let id =i
-	 let newsfav=news
-	 console.log('a '+a)
-	 console.log('b '+b)
-	 console.log(id)
-	 console.log(newsfav)
-	 this.data.addFav(`${a}`,`${b}`, id, newsfav,1).subscribe(data=>{
-     //this.books = JSON.stringify(data);	//error mapping as object return not array
-      
-     this.clickMessage =` Book with title: ${news[i].title} is saved!`
-	window.alert( this.clickMessage)
-	this.router.navigate(['/favorite'])
-	})}
-else {
-   this.clickMessage = `Need to login first!  book with title: ${news[i].title} is pressed!`;
-   window.alert( this.clickMessage)
-	}
-}
+  addFavHandler(i:number,news:Object,choice:number){
+    if(this.session&&this.session.getItem("username")!=null){ 
+      let a = this.session.getItem("username")
+	    let b = this.session.getItem("password")
+	    let id = i
+	    let newsfav = news
+	    console.log('a '+a)
+	    console.log('b '+b)
+	    console.log(id)
+	    console.log(newsfav)
+	    this.data.addFav(`${a}`,`${b}`, id, newsfav,1).subscribe(data=>{
+      this.clickMessage =` Book with title: ${news[i].title} is saved!`
+	    window.alert( this.clickMessage)
+	    this.router.navigate(['/favorite'])
+      })
+    } else {
+      this.clickMessage = `Need to login first!  book with title: ${news[i].title} is pressed!`;
+      window.alert( this.clickMessage)
+	  }
+  }
 }
 

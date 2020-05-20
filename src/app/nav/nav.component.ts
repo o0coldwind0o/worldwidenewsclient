@@ -16,15 +16,14 @@ logoutPage=''
   constructor(private session: MySessionService) { }
 
   ngOnInit() {
-	var  islogName = ''
+	  var islogName = ''
     this.session.getEmitter().subscribe((islogName) => {
-       this.loginPage=islogName;
-	   this.logoutPage ='Logout'
-	   if(this.loginPage=='Login/Register')
-		   this.logoutPage =''
-	 });
+      this.loginPage=islogName;
+	    this.logoutPage ='Logout'
+	    if(this.loginPage=='Login/Register')
+		    this.logoutPage =''
+	  });
  }
-
 }
 
 	
